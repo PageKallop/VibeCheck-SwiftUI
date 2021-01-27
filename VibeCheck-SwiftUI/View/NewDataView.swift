@@ -36,7 +36,7 @@ struct NewDataView: View {
             }
             .padding()
             
-            HStack{
+            HStack(spacing: 10){
                 DateButtonView(title: "Today", homeData: homeData)
                 DateButtonView(title: "Tomorrow", homeData: homeData)
                 DatePicker("", selection: $homeData.date, displayedComponents: .date)
@@ -48,12 +48,12 @@ struct NewDataView: View {
             
             Button(action: {}, label: {
                 Label(title: { Text("Add Now")
-                    .font(.title)
+                    .font(.title2)
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                 },
                 icon: {Image(systemName: "plus")
-                    .font(.title)
+                    .font(.title2)
                     .foregroundColor(.white)
                 })
                 .padding(.vertical)

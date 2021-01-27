@@ -15,14 +15,15 @@ struct DateButtonView: View {
 
     @ObservedObject var homeData : HomeViewModel
     var body: some View {
-        Button(action: {}, label: {
+        Button(action: {homeData.updateDate(value: title)}, label: {
             Text(title)
                 .fontWeight(.bold)
-                .foregroundColor(.white)
+                .foregroundColor(homeData.checkDate() == title ? .white : .gray)
                 .padding(.vertical,10)
                 .padding(.horizontal,20)
                 .background(
-                    LinearGradient(gradient: .init(colors: [Color(.cyan), Color(.black)]), startPoint: .leading, endPoint: .trailing)
+                    homeData.checkDate() == title ?
+                        LinearGradient(gradient: .init(colors: [Color(.cyan), Color(.black)]), startPoint: .leading, endPoint: .trailing) : LinearGradient(gradient: .init(colors: [Color(.white)]), startPoint: .leading, endPoint: .trailing)
                 )
                 .cornerRadius(6)
         })
