@@ -21,7 +21,7 @@ struct NewDataView: View {
             
             HStack {
                 
-                Text("Vibe Check")
+                Text("\(homeData.updateItem == nil ? "Add New" : "Update") Vibe Check")
                     .font(.system(size: 55))
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
@@ -52,6 +52,7 @@ struct NewDataView: View {
             
             
             Button(action: {homeData.writeData(context: context)
+                homeData.isNewData.toggle()
                
             }, label: {
                 Label(title: { Text(homeData.updateItem == nil ? "Add Now" : "Update")

@@ -33,20 +33,21 @@ struct HomeView: View {
                 .background(Color.white)
                 
                 
-                if results.isEmpty{
+                if results.isEmpty {
                     Spacer()
                     Text("No Tasks")
                         .font(.title)
                         .foregroundColor(.black)
                         .fontWeight(.heavy)
                     Spacer()
+               
                 } else {
                 
                 ScrollView(.vertical, showsIndicators: false, content: {
                     LazyVStack(alignment: .leading, spacing: 20) {
                         ForEach(results){ checkIn in
                             VStack(alignment: .leading, spacing: 5, content: {
-                                Text(checkIn.content ?? "")
+                                Text(checkIn.content ?? "None")
                                     .font(.title)
                                     .fontWeight(.bold)
                                 Text(checkIn.date ?? Date(), style: .date)
@@ -54,7 +55,7 @@ struct HomeView: View {
                             })
                             .foregroundColor(.black)
                             .contextMenu {
-                                Button(action: {homeVM.editItem(item: checkIn)}, label: {
+                                Button(action: {homeVM.editItem(checkIn: checkIn)}, label: {
                                     Text("Edit")
                                 })
                                 

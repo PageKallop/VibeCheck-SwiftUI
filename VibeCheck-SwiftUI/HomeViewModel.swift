@@ -52,13 +52,13 @@ class HomeViewModel : ObservableObject {
    
             updateItem = nil
             isNewData.toggle()
-            
+
             print(isNewData)
             content = ""
             date = Date()
             return
         }
-        
+
         
         let newTask = CheckIn(context: context)
         newTask.date = date
@@ -75,15 +75,16 @@ class HomeViewModel : ObservableObject {
             print(error.localizedDescription)
          
         }
+       
         
     }
     
-    func editItem(item: CheckIn) {
+    func editItem(checkIn: CheckIn) {
         
-        updateItem = item
-        date = item.date!
-        content = item.content!
-        print(item.content)
+        updateItem = checkIn
+        date = checkIn.date!
+        content = checkIn.content!
+        print(checkIn.content)
     
         isNewData.toggle()
     }
