@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import CoreData
+import Combine
 
 class HomeViewModel : ObservableObject {
     
@@ -15,6 +16,7 @@ class HomeViewModel : ObservableObject {
     @Published var date = Date()
     
     @Published var isNewData = false
+    
     
     @Published var updateItem : CheckIn!
     
@@ -49,7 +51,7 @@ class HomeViewModel : ObservableObject {
             try! context.save()
    
             updateItem = nil
-//            isNewData.toggle()
+            isNewData.toggle()
             
             print(isNewData)
             content = ""
@@ -64,7 +66,7 @@ class HomeViewModel : ObservableObject {
         
         do{
             try context.save()
-//            isNewData.toggle()
+            isNewData.toggle()
             print(isNewData)
             content = ""
             date = Date() 
@@ -81,7 +83,9 @@ class HomeViewModel : ObservableObject {
         updateItem = item
         date = item.date!
         content = item.content!
-//        isNewData.toggle()
+        print(item.content)
+    
+        isNewData.toggle()
     }
     
 }

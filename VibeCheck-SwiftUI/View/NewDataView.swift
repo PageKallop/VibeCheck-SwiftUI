@@ -13,7 +13,7 @@ struct NewDataView: View {
     
     @ObservedObject var homeData : HomeViewModel
     @Environment(\.managedObjectContext) var context
-    
+
  
     var body: some View {
         
@@ -51,8 +51,8 @@ struct NewDataView: View {
             
             
             
-            Button(action: {homeData.writeData(context: context);
-                homeData.isNewData.toggle()
+            Button(action: {homeData.writeData(context: context)
+               
             }, label: {
                 Label(title: { Text(homeData.updateItem == nil ? "Add Now" : "Update")
                     .font(.title2)

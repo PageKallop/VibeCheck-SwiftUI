@@ -11,7 +11,8 @@ import CoreData
 struct HomeView: View {
     
     @StateObject var homeVM = HomeViewModel()
-    @FetchRequest(entity: CheckIn.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: true)], animation: .spring()) var results : FetchedResults<CheckIn>
+    @FetchRequest(entity: CheckIn.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: true)], animation: .spring())
+    var results : FetchedResults<CheckIn>
     @Environment(\.managedObjectContext) var context 
     
     var body: some View {
@@ -43,22 +44,22 @@ struct HomeView: View {
                 
                 ScrollView(.vertical, showsIndicators: false, content: {
                     LazyVStack(alignment: .leading, spacing: 20) {
-                        ForEach(results){ task in
+                        ForEach(results){ checkIn in
                             VStack(alignment: .leading, spacing: 5, content: {
-                                Text(task.content ?? "")
+                                Text(checkIn.content ?? "")
                                     .font(.title)
                                     .fontWeight(.bold)
-                                Text(task.date ?? Date(), style: .date)
+                                Text(checkIn.date ?? Date(), style: .date)
                                     .fontWeight(.bold)
                             })
                             .foregroundColor(.black)
                             .contextMenu {
-                                Button(action: {homeVM.editItem(item: task)}, label: {
+                                Button(action: {homeVM.editItem(item: checkIn)}, label: {
                                     Text("Edit")
                                 })
                                 
                                 Button(action: {
-                                    context.delete(task)
+                                    context.delete(checkIn)
                                     try! context.save()
                                 }, label: {
                                     Text("Delete")
