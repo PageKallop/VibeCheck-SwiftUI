@@ -32,6 +32,15 @@ struct HomeView: View {
                 .background(Color.white)
                 
                 
+                if results.isEmpty{
+                    Spacer()
+                    Text("No Tasks")
+                        .font(.title)
+                        .foregroundColor(.black)
+                        .fontWeight(.heavy)
+                    Spacer()
+                } else {
+                
                 ScrollView(.vertical, showsIndicators: false, content: {
                     LazyVStack(alignment: .leading, spacing: 20) {
                         ForEach(results){ task in
@@ -44,7 +53,7 @@ struct HomeView: View {
                             })
                             .foregroundColor(.black)
                             .contextMenu {
-                                Button(action: {}, label: {
+                                Button(action: {homeVM.editItem(item: task)}, label: {
                                     Text("Edit")
                                 })
                                 
@@ -59,6 +68,7 @@ struct HomeView: View {
                     }.padding()
                     
                 })
+            }
             }
             Button(action: {homeVM.isNewData.toggle()}, label: {
                 Image(systemName: "plus")

@@ -12,6 +12,7 @@ struct DateButtonView: View {
     
    
     var title: String
+    
 
     @ObservedObject var homeData : HomeViewModel
     var body: some View {

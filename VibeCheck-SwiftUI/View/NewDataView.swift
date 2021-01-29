@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct NewDataView: View {
     
+    
     @ObservedObject var homeData : HomeViewModel
     @Environment(\.managedObjectContext) var context
+    
+ 
     var body: some View {
         
         VStack{
@@ -47,8 +51,10 @@ struct NewDataView: View {
             
             
             
-            Button(action: {homeData.writeData(context: context)}, label: {
-                Label(title: { Text("Add Now")
+            Button(action: {homeData.writeData(context: context);
+                homeData.isNewData.toggle()
+            }, label: {
+                Label(title: { Text(homeData.updateItem == nil ? "Add Now" : "Update")
                     .font(.title2)
                     .foregroundColor(.white)
                     .fontWeight(.bold)
