@@ -49,7 +49,7 @@ class HomeViewModel : ObservableObject {
             updateItem.content = content
             
             try! context.save()
-   
+            print("updated")
             updateItem = nil
             isNewData.toggle()
 

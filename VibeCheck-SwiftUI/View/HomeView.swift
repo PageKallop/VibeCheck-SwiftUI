@@ -45,7 +45,7 @@ struct HomeView: View {
                 
                 ScrollView(.vertical, showsIndicators: false, content: {
                     LazyVStack(alignment: .leading, spacing: 20) {
-                        ForEach(results){ checkIn in
+                        ForEach(results) { checkIn in
                             VStack(alignment: .leading, spacing: 5, content: {
                                 Text(checkIn.content ?? "None")
                                     .font(.title)
@@ -54,9 +54,12 @@ struct HomeView: View {
                                     .fontWeight(.bold)
                             })
                             .foregroundColor(.black)
+                            
                             .contextMenu {
                                 Button(action: {homeVM.editItem(checkIn: checkIn)}, label: {
+                                    
                                     Text("Edit")
+                                    
                                 })
                                 
                                 Button(action: {
@@ -72,6 +75,7 @@ struct HomeView: View {
                 })
             }
             }
+        
             Button(action: {homeVM.isNewData.toggle()}, label: {
                 Image(systemName: "plus")
                     .font(.largeTitle)
