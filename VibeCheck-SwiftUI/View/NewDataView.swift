@@ -10,24 +10,24 @@ import CoreData
 
 struct NewDataView: View {
     
-    
-    @ObservedObject var homeData : HomeViewModel
+    @StateObject var homeData = HomeViewModel()
+//    @ObservedObject var homeData : HomeViewModel
     @Environment(\.managedObjectContext) var context
 
- 
     var body: some View {
-        
+    
         VStack{
             
             HStack {
                 
-                Text("\(homeData.updateItem == nil ? "Add New" : "Update")")
+                Text("\(homeData.content == nil ? "Add New" : "Update")")
                     .font(.system(size: 55))
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
                 Spacer(minLength: 0)
             }
             .padding()
+           
             TextEditor(text: $homeData.content)
                 .padding()
             Divider()
@@ -52,10 +52,9 @@ struct NewDataView: View {
             
             
             Button(action: {homeData.writeData(context: context)
-                homeData.isNewData.toggle()
                
             }, label: {
-                Label(title: { Text(homeData.isNewData == nil ? "Add Now" : "Update")
+                Label(title: { Text(homeData.updateItem == nil ? "Add Now" : "Update")
                     .font(.title2)
                     .foregroundColor(.white)
                     .fontWeight(.bold)

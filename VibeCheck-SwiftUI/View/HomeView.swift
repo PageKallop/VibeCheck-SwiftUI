@@ -13,6 +13,7 @@ struct HomeView: View {
     @StateObject var homeVM = HomeViewModel()
     @FetchRequest(entity: CheckIn.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: true)], animation: .spring())
     var results : FetchedResults<CheckIn>
+    
     @Environment(\.managedObjectContext) var context 
     
     var body: some View {

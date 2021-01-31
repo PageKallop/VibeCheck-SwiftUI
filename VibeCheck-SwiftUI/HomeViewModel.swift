@@ -49,6 +49,7 @@ class HomeViewModel : ObservableObject {
             updateItem.content = content
             
             try! context.save()
+            
             print("updated")
             updateItem = nil
             isNewData.toggle()
@@ -59,7 +60,7 @@ class HomeViewModel : ObservableObject {
             return
         }
 
-        
+        else {
         let newTask = CheckIn(context: context)
         newTask.date = date
         newTask.content = content
@@ -76,7 +77,7 @@ class HomeViewModel : ObservableObject {
          
         }
        
-        
+        }
     }
     
     func editItem(checkIn: CheckIn) {
