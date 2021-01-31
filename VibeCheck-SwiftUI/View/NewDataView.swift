@@ -7,11 +7,14 @@
 
 import SwiftUI
 import CoreData
+import Combine
 
 struct NewDataView: View {
     
-    @StateObject var homeData = HomeViewModel()
-//    @ObservedObject var homeData : HomeViewModel
+
+    @ObservedObject var homeData : HomeViewModel
+    
+    
     @Environment(\.managedObjectContext) var context
 
     var body: some View {
@@ -20,15 +23,17 @@ struct NewDataView: View {
             
             HStack {
                 
-                Text("\(homeData.content == nil ? "Add New" : "Update")")
+                Text("\(homeData.updateItem == nil ? "Add New" : "Update") Vibe")
                     .font(.system(size: 55))
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
                 Spacer(minLength: 0)
             }
             .padding()
-           
+
+            
             TextEditor(text: $homeData.content)
+//            Text("new box \(homeData.updateItem.content ?? "?")")
                 .padding()
             Divider()
                 .padding(.horizontal)

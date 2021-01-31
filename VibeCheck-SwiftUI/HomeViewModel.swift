@@ -15,10 +15,13 @@ class HomeViewModel : ObservableObject {
     @Published var content = ""
     @Published var date = Date()
     
+    
+    
     @Published var isNewData = false
     
     
     @Published var updateItem : CheckIn!
+    
     
     let calendar = Calendar.current
     
@@ -44,23 +47,8 @@ class HomeViewModel : ObservableObject {
     
     func writeData(context: NSManagedObjectContext) {
         
-        if updateItem != nil {
-            updateItem.date = date
-            updateItem.content = content
-            
-            try! context.save()
-            
-            print("updated")
-            updateItem = nil
-            isNewData.toggle()
 
-            print(isNewData)
-            content = ""
-            date = Date()
-            return
-        }
-
-        else {
+            print("making new note")
         let newTask = CheckIn(context: context)
         newTask.date = date
         newTask.content = content
@@ -77,15 +65,34 @@ class HomeViewModel : ObservableObject {
          
         }
        
-        }
+        
     }
     
-    func editItem(checkIn: CheckIn) {
-        
-        updateItem = checkIn
-        date = checkIn.date!
+    func editItem(context: NSManagedObjectContext) {
+      
+        let updateTask = CheckIn(context: context)
+        updateTask.date = date
         content = checkIn.content!
-        print(checkIn.content)
+        print(updateItem.content)
+        
+        if updateItem != nil {
+            print("!= nil")
+            updateItem.date = date
+            updateItem.content = content
+            print("before save")
+            writeData(context: updateItem)
+            
+            print("updated")
+            updateItem = nil
+            print("update2\(updateItem.content)")
+            isNewData.toggle()
+
+            print("isNewData")
+            content = ""
+            date = Date()
+            print("before return\(isNewData)")
+            return
+        }
     
         isNewData.toggle()
     }

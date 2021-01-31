@@ -48,7 +48,7 @@ struct HomeView: View {
                     LazyVStack(alignment: .leading, spacing: 20) {
                         ForEach(results) { checkIn in
                             VStack(alignment: .leading, spacing: 5, content: {
-                                Text(checkIn.content ?? "None")
+                                Text(checkIn.content ?? "")
                                     .font(.title)
                                     .fontWeight(.bold)
                                 Text(checkIn.date ?? Date(), style: .date)
