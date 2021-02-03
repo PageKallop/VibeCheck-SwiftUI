@@ -14,12 +14,7 @@ class HomeViewModel : ObservableObject {
     
     @Published var content = ""
     @Published var date = Date()
-    
-    
-    
     @Published var isNewData = false
-    
-    
     @Published var updateItem : CheckIn!
     
     
@@ -35,9 +30,8 @@ class HomeViewModel : ObservableObject {
         }
     }
     func updateDate(value: String) {
-        
         if value == "Today"{date = Date()}
-        else if value == "Tomorrow"{
+         else if value == "Tomorrow"{
             date = calendar.date(byAdding: .day, value: 1, to: Date())!
         }
         else {
@@ -47,54 +41,33 @@ class HomeViewModel : ObservableObject {
     
     func writeData(context: NSManagedObjectContext) {
         
-
-            print("making new note")
+   
         let newTask = CheckIn(context: context)
+       
         newTask.date = date
         newTask.content = content
+      
         
         do{
             try context.save()
             isNewData.toggle()
             print(isNewData)
-            content = ""
-            date = Date() 
+
         }
         catch {
             print(error.localizedDescription)
          
         }
-       
-        
     }
     
-    func editItem(context: NSManagedObjectContext) {
-      
-        let updateTask = CheckIn(context: context)
-        updateTask.date = date
-        content = checkIn.content!
-        print(updateItem.content)
-        
-        if updateItem != nil {
-            print("!= nil")
-            updateItem.date = date
+        func editItem(checkIn: CheckIn) {
+       
+            updateItem = checkIn
             updateItem.content = content
-            print("before save")
-            writeData(context: updateItem)
+            updateItem.date = date
             
-            print("updated")
-            updateItem = nil
-            print("update2\(updateItem.content)")
             isNewData.toggle()
 
-            print("isNewData")
-            content = ""
-            date = Date()
-            print("before return\(isNewData)")
-            return
         }
-    
-        isNewData.toggle()
-    }
     
 }

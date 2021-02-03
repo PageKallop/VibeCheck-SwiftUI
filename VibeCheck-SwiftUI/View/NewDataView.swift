@@ -13,8 +13,6 @@ struct NewDataView: View {
     
 
     @ObservedObject var homeData : HomeViewModel
-    
-    
     @Environment(\.managedObjectContext) var context
 
     var body: some View {
@@ -33,7 +31,8 @@ struct NewDataView: View {
 
             
             TextEditor(text: $homeData.content)
-//            Text("new box \(homeData.updateItem.content ?? "?")")
+
+
                 .padding()
             Divider()
                 .padding(.horizontal)
@@ -57,7 +56,6 @@ struct NewDataView: View {
             
             
             Button(action: {homeData.writeData(context: context)
-               
             }, label: {
                 Label(title: { Text(homeData.updateItem == nil ? "Add Now" : "Update")
                     .font(.title2)

@@ -57,8 +57,8 @@ struct HomeView: View {
                             .foregroundColor(.black)
                             
                             .contextMenu {
+                                //fux fux fix 
                                 Button(action: {homeVM.editItem(checkIn: checkIn)}, label: {
-                                    
                                     Text("Edit")
                                     
                                 })
