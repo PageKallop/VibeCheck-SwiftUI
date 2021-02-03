@@ -41,9 +41,17 @@ class HomeViewModel : ObservableObject {
     
     func writeData(context: NSManagedObjectContext) {
         
+        if  updateItem != nil {
+            updateItem.date = date
+            updateItem.content = content
+            try! context.save()
+            
+            updateItem = nil
+            isNewData.toggle()
+            return
+        }
    
         let newTask = CheckIn(context: context)
-       
         newTask.date = date
         newTask.content = content
       
@@ -51,7 +59,8 @@ class HomeViewModel : ObservableObject {
         do{
             try context.save()
             isNewData.toggle()
-            print(isNewData)
+            content = ""
+            date = Date()
 
         }
         catch {
@@ -60,11 +69,11 @@ class HomeViewModel : ObservableObject {
         }
     }
     
-        func editItem(checkIn: CheckIn) {
+        func editItem(Item: CheckIn) {
        
-            updateItem = checkIn
-            updateItem.content = content
-            updateItem.date = date
+            updateItem = Item
+            date = Item.date!
+            content = Item.content!
             
             isNewData.toggle()
 

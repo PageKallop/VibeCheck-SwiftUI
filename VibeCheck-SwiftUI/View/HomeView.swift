@@ -11,6 +11,7 @@ import CoreData
 struct HomeView: View {
     
     @StateObject var homeVM = HomeViewModel()
+    
     @FetchRequest(entity: CheckIn.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: true)], animation: .spring())
     var results : FetchedResults<CheckIn>
     
@@ -58,7 +59,7 @@ struct HomeView: View {
                             
                             .contextMenu {
                                 //fux fux fix 
-                                Button(action: {homeVM.editItem(checkIn: checkIn)}, label: {
+                                Button(action: {homeVM.editItem(Item: checkIn)}, label: {
                                     Text("Edit")
                                     
                                 })
