@@ -7,12 +7,18 @@
 
 import SwiftUI
 import CoreData
+import Combine
 
 struct HomeView: View {
     
     @StateObject var homeVM = HomeViewModel()
     
     @FetchRequest(entity: CheckIn.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: true)], animation: .spring())
+    
+    
+//    @FetchRequest(entityName: "content")
+    
+    
     var results : FetchedResults<CheckIn>
     
     @Environment(\.managedObjectContext) var context 
