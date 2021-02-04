@@ -13,6 +13,7 @@ struct NewDataView: View {
     
 
     @ObservedObject var homeData : HomeViewModel
+  
     @Environment(\.managedObjectContext) var context
 
     var body: some View {
@@ -21,18 +22,17 @@ struct NewDataView: View {
             
             HStack {
                 
+//                Text("\(homeData.updateItem)")
                 Text("\(homeData.updateItem == nil ? "Add New" : "Update") Vibe")
                     .font(.system(size: 55))
                     .fontWeight(.heavy)
                     .foregroundColor(.black)
+                
                 Spacer(minLength: 0)
             }
-            .padding()
-
             
+            .padding()
             TextEditor(text: $homeData.content)
-
-
                 .padding()
             Divider()
                 .padding(.horizontal)
@@ -42,6 +42,7 @@ struct NewDataView: View {
                     .fontWeight(.bold)
                     .foregroundColor(.black)
                 Spacer(minLength: 0)
+                
             }
             .padding()
             
@@ -52,16 +53,15 @@ struct NewDataView: View {
                     .labelsHidden()
             }
             .padding()
-            
-            
-            
             Button(action: {homeData.writeData(context: context)
             }, label: {
                 Label(title: { Text(homeData.updateItem == nil ? "Add Now" : "Update")
+                    
                     .font(.title2)
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                 },
+                
                 icon: {Image(systemName: "plus")
                     .font(.title2)
                     .foregroundColor(.white)

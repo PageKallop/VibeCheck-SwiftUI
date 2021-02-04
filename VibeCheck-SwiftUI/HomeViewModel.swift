@@ -70,11 +70,13 @@ class HomeViewModel : ObservableObject {
     }
     
         func editItem(Item: CheckIn) {
-       
+      
             updateItem = Item
             date = Item.date!
             content = Item.content!
             
+       
+          
             isNewData.toggle()
 
         }

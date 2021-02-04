@@ -11,6 +11,7 @@ import Combine
 
 struct HomeView: View {
     
+    
     @StateObject var homeVM = HomeViewModel()
     
     @FetchRequest(entity: CheckIn.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: true)], animation: .spring())
@@ -54,22 +55,31 @@ struct HomeView: View {
                 ScrollView(.vertical, showsIndicators: false, content: {
                     LazyVStack(alignment: .leading, spacing: 20) {
                         ForEach(results) { checkIn in
+                            
                             VStack(alignment: .leading, spacing: 5, content: {
                                 Text(checkIn.content ?? "")
                                     .font(.title)
                                     .fontWeight(.bold)
                                 Text(checkIn.date ?? Date(), style: .date)
                                     .fontWeight(.bold)
+                                
                             })
                             .foregroundColor(.black)
                             
                             .contextMenu {
+                                
                                 //fux fux fix 
-                                Button(action: {homeVM.editItem(Item: checkIn)}, label: {
+                                Button(action: {
+                                    homeVM.editItem(Item: checkIn)
+                                    print(checkIn)
+                                   
+                                }, label: {
                                     Text("Edit")
                                     
-                                })
-                                
+                                    
+                                }
+                                )
+                              
                                 Button(action: {
                                     context.delete(checkIn)
                                     try! context.save()
