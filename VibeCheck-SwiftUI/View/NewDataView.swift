@@ -7,7 +7,7 @@
 
 import SwiftUI
 import CoreData
-import Combine
+
 
 struct NewDataView: View {
     
@@ -16,13 +16,14 @@ struct NewDataView: View {
   
     @Environment(\.managedObjectContext) var context
 
+
     var body: some View {
     
         VStack{
             
             HStack {
-                
-//                Text("\(homeData.updateItem)")
+
+               
                 Text("\(homeData.updateItem == nil ? "Add New" : "Update") Vibe")
                     .font(.system(size: 55))
                     .fontWeight(.heavy)

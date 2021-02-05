@@ -7,19 +7,13 @@
 
 import SwiftUI
 import CoreData
-import Combine
+
 
 struct HomeView: View {
-    
     
     @StateObject var homeVM = HomeViewModel()
     
     @FetchRequest(entity: CheckIn.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: true)], animation: .spring())
-    
-    
-//    @FetchRequest(entityName: "content")
-    
-    
     var results : FetchedResults<CheckIn>
     
     @Environment(\.managedObjectContext) var context 
@@ -71,14 +65,10 @@ struct HomeView: View {
                                 //fux fux fix 
                                 Button(action: {
                                     homeVM.editItem(Item: checkIn)
-                                    print(checkIn)
                                    
                                 }, label: {
                                     Text("Edit")
-                                    
-                                    
-                                }
-                                )
+                                    })
                               
                                 Button(action: {
                                     context.delete(checkIn)

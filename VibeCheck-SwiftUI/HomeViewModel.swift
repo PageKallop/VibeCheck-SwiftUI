@@ -5,18 +5,19 @@
 //  Created by Page Kallop on 1/26/21.
 //
 
-import Foundation
+
 import SwiftUI
 import CoreData
-import Combine
+
 
 class HomeViewModel : ObservableObject {
     
     @Published var content = ""
     @Published var date = Date()
+    
     @Published var isNewData = false
     @Published var updateItem : CheckIn!
-    
+
     
     let calendar = Calendar.current
     
@@ -48,6 +49,8 @@ class HomeViewModel : ObservableObject {
             
             updateItem = nil
             isNewData.toggle()
+            content = ""
+            date = Date()
             return
         }
    
@@ -74,9 +77,6 @@ class HomeViewModel : ObservableObject {
             updateItem = Item
             date = Item.date!
             content = Item.content!
-            
-       
-          
             isNewData.toggle()
 
         }
